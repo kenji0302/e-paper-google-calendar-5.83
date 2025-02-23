@@ -70,7 +70,10 @@ class EPD_5in83_B():
         utime.sleep(delaytime / 1000.0)
 
     def spi_writebyte(self, data):
-        self.spi.write(bytearray(data))
+        # self.spi.write(bytearray(data))
+        for i in range(0, len(data), 64):
+            chunk = bytearray(data[i:i + 64])
+            self.spi.write(chunk)
 
     def module_exit(self):
         self.digital_write(self.reset_pin, 0)
