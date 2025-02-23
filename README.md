@@ -15,7 +15,7 @@
 
 ## 追加するコード
 
-日本語フォント（16pxのみ）。設置方法などは以下を参照。
+日本語フォント（24pxのみ）。設置方法などは以下を参照。
 [Raspberry Pi Pico W で e-paper に日本語を表示する その2（大きめのフォント表示） #micropython - Qiita](https://qiita.com/kenji0302/items/8da4c075dff974d1dc6f)
 
 
