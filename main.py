@@ -4,8 +4,12 @@ from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblackt
 from Pico_ePaper_5_83_B import EPD_5in83_B
 from mfont import mfont
 from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN,GOOGLE_CALENDAR_ID
+from machine import Pin
 
 if __name__=='__main__':
+    
+    led = machine.Pin('LED', Pin.OUT)
+    led.value(1)
     
     while True:
 
