@@ -21,6 +21,14 @@
 
 ## 編集が必要なファイル
 
-- index.php
+- secret.php
 - secret.py
 
+## Google の TOKEN 取得
+
+```bash
+mkdir data
+php -S 0.0.0.0:8080
+```
+
+<http://localhost:8080> から Google 認証、REFRESH TOKENの取得 でテキストボックスに表示される。
