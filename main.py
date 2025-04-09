@@ -3,7 +3,7 @@ import ntptime
 from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api
 from Pico_ePaper_5_83_B import EPD_5in83_B
 from mfont import mfont
-from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN,GOOGLE_CALENDAR_ID
+from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALENDAR_ID, get_google_refresh_token
 from machine import Pin
 
 if __name__=='__main__':
@@ -24,7 +24,7 @@ if __name__=='__main__':
         # print(ymd)
 
         # カレンダー取得
-        access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN)
+        access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
 
         # 画面表示
         epd = EPD_5in83_B()
