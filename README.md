@@ -1,5 +1,8 @@
 # Google Calendar を Raspberry Pi Pico W と e-paer で表示する
 
+![image](https://github.com/user-attachments/assets/3d6ef08c-8f32-4f09-bb83-2d39c9d276cb)
+（左はサイズ比較用の Raspberry Pi Pico W）
+
 ## e-paper描画ライブラリについて
 
 [Pico_ePaper_Code/python/Pico-ePaper-5.83-B.py at main · waveshareteam/Pico_ePaper_Code](https://github.com/waveshareteam/Pico_ePaper_Code/blob/main/python/Pico-ePaper-5.83-B.py) を元に一部修正したものをレポジトリに含めています。
