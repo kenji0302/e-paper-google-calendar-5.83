@@ -7,8 +7,12 @@ GOOGLE_REFRESH_TOKEN = "refresh_token"
 GOOGLE_CALENDAR_ID = "カレンダーID"
 
 def get_google_refresh_token():
+    
+    # コードにリフレッシュトークンを埋め込む場合
+    return "リフレッシュトークン" 
 
-    url = 'https://192.168.0.1/cal5.83/token.dat'   # リフレッシュトークンをローカルネットワークから取得できるようにした場合
+    # リフレッシュトークンをローカルネットワークから取得できるようにした場合
+    url = 'https://192.168.0.1/cal5.83/token.dat'
     response = urequests.get(url)
     token = response.text
     response.close()
