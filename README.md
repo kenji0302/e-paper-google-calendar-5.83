@@ -15,6 +15,10 @@
 - [Raspberry Pi Pico WH — スイッチサイエンス](https://www.switch-science.com/products/8172?_pos=1&_sid=5aa1a1afe&_ss=r)
 - [Raspberry Pi Pico用 5.83インチ e-Paper ディスプレイ（白黒赤）648×480 — スイッチサイエンス](https://www.switch-science.com/products/7319)
 
+### なくても良いけどあると便利なもの
+
+- [電池基板A4-2Unit — スイッチサイエンス](https://www.switch-science.com/products/6759?variant=42382124843206)
+- [Amazon.co.jp: オーディオファン microUSB 短い ケーブル 両端子 L字 約12cm L字パターン2 ブラック AFSSLCBL : パソコン・周辺機器](https://www.amazon.co.jp/dp/B091GL481V?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2&th=1)
 
 ## 追加するコード
 
