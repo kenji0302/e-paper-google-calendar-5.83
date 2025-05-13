@@ -36,8 +36,8 @@ if __name__=='__main__':
         mf = mfont()
         mf.setFontSize(24)    
         
-        # deepsleep 1時間
-        sleep_msec = 3600000
+        # deepsleep 6時間
+        sleep_msec = 21600000
         if access_token is None:
             # deepsleep 24時間
             sleep_msec = 86400000
