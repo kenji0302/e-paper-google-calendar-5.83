@@ -36,11 +36,9 @@ if __name__=='__main__':
         mf = mfont()
         mf.setFontSize(24)    
         
-        # deepsleep 6時間
-        sleep_msec = 21600000
+        # deepsleep1時間
+        sleep_msec = 3600000
         if access_token is None:
-            # deepsleep 24時間
-            sleep_msec = 86400000
             jpredtext("カレンダーにアクセス出来ません。", 5, 10, mf, epd)
             jpredtext("トークンを更新してください。", 5, 35, mf, epd)
         else:
