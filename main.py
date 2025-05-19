@@ -1,13 +1,15 @@
-import urequests
-import ntptime
-from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api
+import urequests, ntptime, time, machine
+from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api, jst_ymd_str
 from Pico_ePaper_5_83_B import EPD_5in83_B
 from mfont import mfont
 from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALENDAR_ID, get_google_refresh_token
 from machine import Pin
 
-if __name__=='__main__':
-    
+def main():
+
+    # 処理が始まるとbusyになってしまうので、開発用のコンソール接続の余裕といて5秒待つ
+    time.sleep(5)
+
     led = machine.Pin('LED', Pin.OUT)
     led.value(1)
     
@@ -15,26 +17,38 @@ if __name__=='__main__':
 
         machine.Pin(23, machine.Pin.OUT).high()
 
-        # Wifi接続
-        wlan = wifi_connect(WIFI_SSID, WIFI_PASSWORD)
-        ntptime.settime()
-
-        # ymd取得
-        ymd = jst_ymd()
-        # print(ymd)
-
-        # カレンダー取得
-        access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
-
         # 画面表示
         epd = EPD_5in83_B()
         epd.Clear(0xff, 0x00)
         epd.imageblack.fill(0xff)
         epd.imagered.fill(0x00)
 
-
         mf = mfont()
         mf.setFontSize(24)    
+
+        while True:
+            try:
+                # Wifi接続
+                wlan = wifi_connect(WIFI_SSID, WIFI_PASSWORD)
+                # NTPで時間セット
+                ntptime.settime()
+                error_count = 0  # 成功したらカウントリセット（任意）
+                break
+            except Exception as e:
+                error_count += 1
+                print("ネットワーク例外 : ", e)
+                time.sleep(5)
+                if error_count >= 3:
+                    jpredtext("ネットワークに問題が発生しました、リセットします。", 5, 10, mf, epd)
+                    epd.display(epd.buffer_black, epd.buffer_red)
+                    epd.delay_ms(2000)
+                    machine.reset()
+
+        # ymd取得
+        ymd = jst_ymd()
+
+        # カレンダー取得
+        access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
         
         # deepsleep1時間
         sleep_msec = 3600000
@@ -80,6 +94,8 @@ if __name__=='__main__':
             else:
                 print("Failed to retrieve events:", response.status_code, response.text)
 
+        # データ更新日表示
+        epd.imageblack.text("Updated at : " + jst_ymd_str(), 463, 473, 0x00)
         epd.display(epd.buffer_black, epd.buffer_red)
         
         print("deepsleep")
@@ -87,3 +103,7 @@ if __name__=='__main__':
         # time.sleep_ms(sleep_msec)
         machine.Pin(23, machine.Pin.OUT).low()
         machine.deepsleep(sleep_msec)
+
+
+if __name__=='__main__':
+    main()
