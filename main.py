@@ -1,5 +1,5 @@
-import urequests, ntptime, time, machine
-from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api, jst_ymd_str
+import urequests, ntptime, time, machine, sys
+from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api, jst_ymdhms_str
 from Pico_ePaper_5_83_B import EPD_5in83_B
 from mfont import mfont
 from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALENDAR_ID, get_google_refresh_token
@@ -46,6 +46,8 @@ def main():
 
         # ymd取得
         ymd = jst_ymd()
+        # データ更新日表示
+        epd.imageblack.text("Updated at : " + jst_ymdhms_str(), 390, 473, 0x00)
 
         # カレンダー取得
         access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
@@ -94,8 +96,6 @@ def main():
             else:
                 print("Failed to retrieve events:", response.status_code, response.text)
 
-        # データ更新日表示
-        epd.imageblack.text("Updated at : " + jst_ymd_str(), 463, 473, 0x00)
         epd.display(epd.buffer_black, epd.buffer_red)
         
         print("deepsleep")

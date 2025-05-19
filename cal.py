@@ -14,16 +14,23 @@ def jst_ymd():
     jst_time = time.localtime(time.mktime(utctime) + JST_OFFSET)
     return "{:04d}{:02d}{:02d}".format(jst_time[0], jst_time[1], jst_time[2])
 
-def jst_ymd_str():
+def jst_ymdhms_str():
     """JSTのYYYY/MM/DD/を取得
 
     Returns:
-        string : yyyy/mm/dd
+        string : yyyy/mm/dd hh:mm:ss
     """
     utctime = time.localtime()
     JST_OFFSET = 9 * 60 * 60
     jst_time = time.localtime(time.mktime(utctime) + JST_OFFSET)
-    return "{:04d}/{:02d}/{:02d}".format(jst_time[0], jst_time[1], jst_time[2])
+    return "{:04d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}".format(
+    jst_time[0],
+    jst_time[1],
+    jst_time[2],
+    jst_time[3],
+    jst_time[4],
+    jst_time[5],
+)
 
 def jst_today_ymdhms_for_api():
     """APIリクエスト用のJSTのymdhmsを取得する
