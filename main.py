@@ -32,7 +32,7 @@ def main():
                 wlan = wifi_connect(WIFI_SSID, WIFI_PASSWORD)
                 # NTPで時間セット
                 ntptime.settime()
-                error_count = 0  # 成功したらカウントリセット（任意）
+                error_count = 0  # 成功したらカウントリセット
                 break
             except Exception as e:
                 error_count += 1
