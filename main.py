@@ -24,15 +24,19 @@ def main():
         epd.imagered.fill(0x00)
 
         mf = mfont()
-        mf.setFontSize(24)    
+        mf.setFontSize(24)
 
+        led.value(0)
+        time.sleep(0.2)
+        led.value(1)
+
+        error_count = 0
         while True:
             try:
                 # Wifi接続
                 wlan = wifi_connect(WIFI_SSID, WIFI_PASSWORD)
                 # NTPで時間セット
                 ntptime.settime()
-                error_count = 0  # 成功したらカウントリセット
                 break
             except Exception as e:
                 error_count += 1
@@ -44,6 +48,14 @@ def main():
                     epd.delay_ms(2000)
                     machine.reset()
 
+        led.value(0)
+        time.sleep(0.2)
+        led.value(1)
+        time.sleep(0.2)
+        led.value(0)
+        time.sleep(0.2)
+        led.value(1)
+
         # ymd取得
         ymd = jst_ymd()
         # データ更新日表示
@@ -51,7 +63,19 @@ def main():
 
         # カレンダー取得
         access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
-        
+
+        led.value(0)
+        time.sleep(0.2)
+        led.value(1)
+        time.sleep(0.2)
+        led.value(0)
+        time.sleep(0.2)
+        led.value(1)
+        time.sleep(0.2)
+        led.value(0)
+        time.sleep(0.2)
+        led.value(1)
+
         # deepsleep1時間
         sleep_msec = 3600000
         if access_token is None:
