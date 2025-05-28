@@ -44,6 +44,20 @@ def jst_today_ymdhms_for_api():
     
     return "{:04d}-{:02d}-{:02d}T00:00:00Z".format(jst_time[0], jst_time[1], jst_time[2])
 
+def jst_str_to_ymdw(date_str):
+    """YYYY-MM-DD を YYYY年MM月DD日(W)に変換
+
+    Args:
+        date_str (string): YYYY-MM-DD
+    """
+    year, month, day = map(int, date_str.split('-'))
+
+    timestamp = time.mktime((year, month, day, 0, 0, 0, 0, 0))
+    jst_time = time.localtime(timestamp)
+    weekday = ['月', '火', '水', '木', '金', '土', '日'][jst_time[6]]
+
+    return f'{year % 100:02d}/{month:02d}/{day:02d}({weekday})'
+
 def wifi_connect(ssid, password):
     """Wifiに接続する
 

@@ -1,5 +1,5 @@
 import urequests, ntptime, time, machine, sys
-from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api, jst_ymdhms_str
+from cal import jst_ymd, wifi_connect, refresh_access_token, jpredtext, jpblacktext, jst_today_ymdhms_for_api, jst_ymdhms_str, jst_str_to_ymdw
 from Pico_ePaper_5_83_B import EPD_5in83_B
 from mfont import mfont
 from secret import WIFI_SSID, WIFI_PASSWORD,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALENDAR_ID, get_google_refresh_token
@@ -105,11 +105,11 @@ def main():
                 for event in events:
                     if 'date' in event['start']:
                         event_ymd = event['start']['date'][0:4] + event['start']['date'][5:7] + event['start']['date'][8:10]
-                        event_str = event['start']['date'][5:7] + '月' + event['start']['date'][8:10] + '日' + ' ' + event['summary']
+                        event_str = jst_str_to_ymdw(event['start']['date']) + ' ' + event['summary']
                         print(event_str)
                     elif 'dateTime' in event['start']:
                         event_ymd = event['start']['dateTime'][0:4] + event['start']['dateTime'][5:7] + event['start']['dateTime'][8:10]
-                        event_str = event['start']['dateTime'][5:7] + '月' + event['start']['dateTime'][8:10] + '日' +   event['start']['dateTime'][11:16] + ' ' + event['summary']
+                        event_str = jst_str_to_ymdw(event['start']['dateTime'][0:10]) + event['start']['dateTime'][11:16] + ' ' + event['summary']
                         print(event_str)
                     
                     if event_ymd == ymd:
@@ -121,7 +121,7 @@ def main():
                 print("Failed to retrieve events:", response.status_code, response.text)
 
         epd.display(epd.buffer_black, epd.buffer_red)
-        
+        # sys.exit()
         print("deepsleep")
         
         # time.sleep_ms(sleep_msec)
