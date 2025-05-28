@@ -59,7 +59,7 @@ def main():
         # ymd取得
         ymd = jst_ymd()
         # データ更新日表示
-        epd.imageblack.text("Updated at : " + jst_ymdhms_str(), 390, 473, 0x00)
+        epd.imageblack.text("Updated at : " + jst_ymdhms_str(), 370, 473, 0x00)
 
         # カレンダー取得
         access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
@@ -79,8 +79,8 @@ def main():
         # deepsleep1時間
         sleep_msec = 3600000
         if access_token is None:
-            jpredtext("カレンダーにアクセス出来ません。", 5, 10, mf, epd)
-            jpredtext("トークンを更新してください。", 5, 35, mf, epd)
+            jpredtext("カレンダーにアクセス出来ません。", 30, 10, mf, epd)
+            jpredtext("トークンを更新してください。", 30, 35, mf, epd)
         else:
 
             calendar_id = "primary"
@@ -99,7 +99,7 @@ def main():
 
                 events = response.json().get('items', [])            
                 
-                x = 10
+                y = 10
                 i = 0
                 
                 for event in events:
@@ -113,10 +113,10 @@ def main():
                         print(event_str)
                     
                     if event_ymd == ymd:
-                        jpredtext(event_str, 5, x, mf, epd)
+                        jpredtext(event_str, 30, y, mf, epd)
                     else:
-                        jpblacktext(event_str, 5, x, mf, epd)
-                    x = x + 37
+                        jpblacktext(event_str, 30, y, mf, epd)
+                    y = y + 37
             else:
                 print("Failed to retrieve events:", response.status_code, response.text)
 
