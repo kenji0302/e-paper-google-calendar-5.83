@@ -17,7 +17,7 @@
 
 ### なくても良いけどあると便利なもの
 
-- [電池基板A4-2Unit — スイッチサイエンス](https://www.switch-science.com/products/6759?variant=42382124843206)
+- [Amazon.co.jp: オーディオファン 電池ボックス USB出力対応 ON/OFF スイッチ付き USB-A メス 単3電池 4本 1.5V 6V (1.2V 4.8V) 単三電池 出力用 ケース : 産業・研究開発用品](https://www.amazon.co.jp/dp/B0B4W7Z1ML)
 - [Amazon.co.jp: オーディオファン microUSB 短い ケーブル 両端子 L字 約12cm L字パターン2 ブラック AFSSLCBL : パソコン・周辺機器](https://www.amazon.co.jp/dp/B091GL481V?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2&th=1)
 
 ## 追加するコード
