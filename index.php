@@ -2,8 +2,94 @@
 require("secret.php");
 ?>
 <html>
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 30px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    a {
+      display: inline-block;
+      background-color: #008CBA;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    a:hover {
+      background-color: #007399;
+    }
+
+    @media screen and (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+      }
+
+      a {
+        display: block;
+        text-align: center;
+      }
+    }
+  </style>
   <script>
     window.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('myForm');
@@ -19,7 +105,6 @@ require("secret.php");
             body: formData
           });
           if (!response.ok) throw new Error('通信に失敗しました');
-
 
           const result = await response.json();
 
@@ -46,7 +131,6 @@ require("secret.php");
   <?php if (!empty($_GET['code'])) { ?>
     <h2>2. REFRESH TOKENの取得</h2>
     <p>
-
     <form method="post" id="myForm">
       <input type="hidden" name="code" value="<?php echo htmlentities($_GET['code']) ?>" />
       <input type="hidden" name="redirect_uri" value="<?php echo htmlentities($REDIRECT_URI) ?>" />
@@ -68,9 +152,7 @@ require("secret.php");
   <?php if (!empty($_POST['refresh_token'])) {
     file_put_contents("./data/token.dat", $_POST['refresh_token']);
   ?>
-    REFRESH TOKENを保存しました
+    <p>REFRESH TOKENを保存しました</p>
   <?php } ?>
-
 </body>
-
 </html>
