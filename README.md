@@ -1,6 +1,7 @@
 # Google Calendar を Raspberry Pi Pico W と e-paer で表示する
 
-![image](https://github.com/user-attachments/assets/47391cf4-f2a1-41b3-94cd-7e46241f52a3)
+![CleanShot 2025-05-28 at 22 43 03@2x](https://github.com/user-attachments/assets/bba07995-3b2c-463d-b451-71cb120ef3fb)
+
 （左はサイズ比較用の Raspberry Pi Pico W）
 
 ## e-paper描画ライブラリについて
