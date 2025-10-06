@@ -18,10 +18,6 @@ def main():
         machine.Pin(23, machine.Pin.OUT).high()
 
         # 画面表示
-        epd = EPD_5in83_B()
-        epd.Clear(0xff, 0x00)
-        epd.imageblack.fill(0xff)
-        epd.imagered.fill(0x00)
 
         mf = mfont()
         mf.setFontSize(24)
@@ -43,6 +39,7 @@ def main():
                 print("ネットワーク例外 : ", e)
                 time.sleep(5)
                 if error_count >= 3:
+                    epd = epd_init()
                     jpredtext("ネットワークに問題が発生しました、リセットします。", 5, 10, mf, epd)
                     epd.display(epd.buffer_black, epd.buffer_red)
                     epd.delay_ms(2000)
@@ -55,11 +52,6 @@ def main():
         led.value(0)
         time.sleep(0.2)
         led.value(1)
-
-        # ymd取得
-        ymd = jst_ymd()
-        # データ更新日表示
-        epd.imageblack.text("Updated at : " + jst_ymdhms_str(), 370, 473, 0x00)
 
         # カレンダー取得
         access_token = refresh_access_token(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, get_google_refresh_token())
@@ -82,6 +74,13 @@ def main():
             jpredtext("カレンダーにアクセス出来ません。", 30, 10, mf, epd)
             jpredtext("トークンを更新してください。", 30, 35, mf, epd)
         else:
+            # ymd取得
+            ymd = jst_ymd()
+
+            # 画面初期化
+            epd = epd_init()
+            # データ更新日表示
+            epd.imageblack.text("Updated at : " + jst_ymdhms_str(), 370, 473, 0x00)
 
             calendar_id = "primary"
 
@@ -127,6 +126,19 @@ def main():
         # time.sleep_ms(sleep_msec)
         machine.Pin(23, machine.Pin.OUT).low()
         machine.deepsleep(sleep_msec)
+
+
+def epd_init():
+    """ePaperディスプレイを初期化して描画に備える。
+
+    Returns:
+        EPD_5in83_B: 全面を白/赤でクリアしたディスプレイインスタンス。
+    """
+    epd = EPD_5in83_B()
+    epd.Clear(0xff, 0x00)
+    epd.imageblack.fill(0xff)
+    epd.imagered.fill(0x00)
+    return epd
 
 
 if __name__=='__main__':
