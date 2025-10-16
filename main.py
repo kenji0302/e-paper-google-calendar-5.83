@@ -86,7 +86,7 @@ def main():
 
             ymdhms = jst_today_ymdhms_for_api() 
             
-            url = "https://www.googleapis.com/calendar/v3/calendars/" + GOOGLE_CALENDAR_ID + "/events?maxResults=13&timeMin=" + ymdhms + "&orderBy=startTime&singleEvents=True&timeZone=JST"
+            url = "https://www.googleapis.com/calendar/v3/calendars/" + GOOGLE_CALENDAR_ID + "/events?maxResults=13&timeMin=" + ymdhms + "&orderBy=startTime&singleEvents=True&timeZone=JST&fields=items(start,summary)"
 
             headers = {
                 "Authorization": "Bearer " + access_token
